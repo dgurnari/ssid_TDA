@@ -22,7 +22,7 @@ def accumulate():
     basis = sorted(list(basis))
 
     timestamps = readings.keys()
-    timestamps.sort(key=lambda x: float(x))
+    timestamps = sorted(timestamps, key=lambda x: float(x))
     i=1
 
     for t in timestamps:
