@@ -18,7 +18,11 @@ def collect():
     process = Popen(['iwlist','scan'], stdout=PIPE, stderr=PIPE)
     stdout, stderr = process.communicate()
     timestamp = time()
+    # solution 1, uncomment the following
+    # stdout = stdout.decode('utf-8')
     match = finditer('Address: (..:..:..:..:..:..).*\n.*\n.*\n.*Signal level=([-0-9]*) dBm', stdout, MULTILINE)
+    # soution 2: replace the line above with the following
+    # match = finditer(br'Address: (..:..:..:..:..:..).*\n.*\n.*\n.*Signal level=([-0-9]*) dBm', stdout, MULTILINE)
     for f in match:
         print(timestamp, f.group(1), f.group(2))
         file_out.write( '{0} {1} {2}'.format(timestamp, f.group(1), f.group(2)) + "\n" )
